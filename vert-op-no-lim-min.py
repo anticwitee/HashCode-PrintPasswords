@@ -55,10 +55,13 @@ for v_pic_num1 in vert_pics:
         if intersect < max_int:
             max_int = intersect
             best_pic_num = v_pic_num2
-    slides.add(Slide(
+    slide = Slide(
         (v_pic_num1, best_pic_num),
         first_set.union(set(vert_pics[best_pic_num][2:]))
-    ))
+    )
+    if last_slide == None:
+        last_slide = slide
+    slides.add(slide)
     vert_pics[v_pic_num1] = None
     vert_pics[best_pic_num] = None
 
