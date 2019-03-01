@@ -17,9 +17,15 @@ class Slide:
     def __str__(self):
         return f"{self.pics} {self.tags}"
 
-filename = sys.argv[1]
+if len(sys.argv) != 3:
+    print("provide in && out relative paths")
+    sys.exit()
+
+in_fname = sys.argv[1]
+out_fname = sys.argv[2]
+
 photos = {}
-with open(filename) as f:
+with open(in_fname) as f:
     num_photos = f.readline()
     for i, line in enumerate(f):
         # format = ORIENTATION TAG_NUMBER <TAGS>
@@ -27,6 +33,7 @@ with open(filename) as f:
         photos[i] = photo
 
 slides = set()
+vert_pic = None
 last_slide = None
 vert_pics = {}
 for photo_num in photos:
@@ -53,7 +60,7 @@ for photo_num in photos:
             vert_pic = None
 
 
-with open(f'out/{filename}', 'w') as out:
+with open(out_fname, 'w') as out:
     n = len(slides) + 1
     out.write(f"{n}\n")
 
